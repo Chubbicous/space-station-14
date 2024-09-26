@@ -127,3 +127,71 @@
       guides:
       - Cyborgs
       - Robotics
+
+# TESTING!!!
+
+- type: entity
+  # parent: BaseItem
+  parent: BaseElectronics
+  id: AIElectronics
+  name: AI interface board
+  description: An electronics board that allows AIs to interface with the robot it's installed in.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: std_mod
+    #   layers:
+    #   - state: posibrain
+    #     map: ["base"]
+    # - type: Input
+      context: human
+    # - type: ToggleableGhostRole
+    #   examineTextMindPresent: positronic-brain-installed
+    #   examineTextMindSearching: positronic-brain-still-searching
+    #   examineTextNoMind: positronic-brain-off
+    #   beginSearchingText: positronic-brain-searching
+    #   roleName: positronic-brain-role-name
+    #   roleDescription: positronic-brain-role-description
+    #   roleRules: ghost-role-information-silicon-rules
+    #   wipeVerbText: positronic-brain-wipe-device-verb-text
+    #   wipeVerbPopup: positronic-brain-wiped-device
+    #   stopSearchVerbText: positronic-brain-stop-searching-verb-text
+    #   stopSearchVerbPopup: positronic-brain-stopped-searching
+    #   job: Borg
+    - type: BlockMovement
+    - type: Examiner
+    - type: BorgBrain
+    - type: IntrinsicRadioReceiver
+    - type: IntrinsicRadioTransmitter
+      channels:
+      - Binary
+    - type: ActiveRadio
+      channels:
+      - Binary
+      - Common
+    - type: NameIdentifier
+      group: PositronicBrain
+    - type: DoAfter
+    - type: Actions
+    - type: TypingIndicator
+      proto: robot
+    - type: Speech
+      speechSounds: Pai
+    - type: MobState
+      allowedStates: # Do I even need this?
+      - Alive
+    - type: Appearance
+    - type: Tag
+      tags:
+      - CannotSuicide
+    # - type: GenericVisualizer
+    #   visuals:
+    #     enum.ToggleableGhostRoleVisuals.Status:
+    #       base:
+    #         Off: { state: posibrain }
+    #         Searching: { state: posibrain-searching }
+    #         On: { state: posibrain-occupied }
+    - type: GuideHelp
+      guides:
+      - Cyborgs
+      - Robotics
