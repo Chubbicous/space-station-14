@@ -1226,11 +1226,80 @@
   - type: Lock
     unlockOnClick: false
 
+# - type: entity
+#   id: StationAiUploadComputer
+#   parent: BaseComputer
+#   name: AI upload console
+#   description: Used to update the laws of the station AI.
+#   components:
+#   - type: Sprite
+#     layers:
+#     - map: [ "computerLayerBody" ]
+#       state: computer
+#     - map: [ "computerLayerKeyboard" ]
+#       state: generic_keyboard
+#     - map: [ "computerLayerScreen" ]
+#       state: aiupload
+#     - map: [ "computerLayerKeys" ]
+#       state: generic_keys
+#     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+#       state: generic_panel_open
+#   - type: ApcPowerReceiver
+#     powerLoad: 1000
+#   - type: Computer
+#     board: StationAiUploadCircuitboard
+#   - type: AccessReader
+#     access: [ [ "ResearchDirector" ] ]
+#   - type: Lock
+#     unlockOnClick: false
+#   - type: SiliconLawUpdater
+#     components:
+#     - type: StationAiHeld
+#   - type: ItemSlotsLock
+#     slots:
+#     - circuit_holder
+#   - type: ItemSlotRequiresPower
+#   - type: ItemSlots
+#     slots:
+#       circuit_holder:
+#         name: circuit-holder
+#         insertSuccessPopup: silicon-laws-updated
+#         whitelist:
+#           requireAll: true
+#           components:
+#           - SiliconLawProvider
+#           - Item
+#   - type: ContainerContainer
+#     containers:
+#       circuit_holder: !type:ContainerSlot
+#       board: !type:Container
+
 - type: entity
   id: StationAiUploadComputer
   parent: BaseComputer
   name: AI upload console
   description: Used to update the laws of the station AI.
+
+  - type: AiUploadConsole
+    moduleSlot1: #ModuleSlot1
+      name: ai-upload-console-slot-1
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - circuit-holder #Need to change, not an actual name
+    moduleSlot2:
+      name: ai-upload-console-slot-2
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - circuit-holder #Need to change, not an actual name
+
   components:
   - type: Sprite
     layers:
@@ -1252,24 +1321,44 @@
     access: [ [ "ResearchDirector" ] ]
   - type: Lock
     unlockOnClick: false
-  - type: SiliconLawUpdater
-    components:
-    - type: StationAiHeld
-  - type: ItemSlotsLock
-    slots:
-    - circuit_holder
-  - type: ItemSlotRequiresPower
+  - type: ActivatableUI
+    key: enum.StationAiUploadConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationAiUploadConsoleUiKey.Key:
+        type: StationAiUploadConsoleBoundUserInterface
+  
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#3c5eb5"
+  - type: Tag
+    tags:
+    - EmagImmune
   - type: ItemSlots
-    slots:
-      circuit_holder:
-        name: circuit-holder
-        insertSuccessPopup: silicon-laws-updated
-        whitelist:
-          requireAll: true
-          components:
-          - SiliconLawProvider
-          - Item
   - type: ContainerContainer
     containers:
-      circuit_holder: !type:ContainerSlot
       board: !type:Container
+      AiUploadConsole-module1: !type:ContainerSlot
+      AiUploadConsole-module2: !type:ContainerSlot
+  # - type: SiliconLawUpdater
+  #   components:
+  #   - type: StationAiHeld
+  # - type: ItemSlotsLock
+  #   slots:
+  #   - circuit_holder
+  # - type: ItemSlotRequiresPower
+  # - type: ItemSlots
+  #   slots:
+  #     circuit_holder:
+  #       name: circuit-holder
+  #       insertSuccessPopup: silicon-laws-updated
+  #       whitelist:
+  #         requireAll: true
+  #         components:
+  #         - SiliconLawProvider
+  #         - Item
+  # - type: ContainerContainer
+  #   containers:
+  #     circuit_holder: !type:ContainerSlot
+  #     board: !type:Container
