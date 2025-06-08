@@ -111,6 +111,10 @@
     - type: Tag
       tags:
         - CannotSuicide
+        - DoorBumpOpener
+    - type: Puller
+      needsHands: false
+    - type: MovementIgnoreGravity
 
 # From the uplink injector
 - type: entity
